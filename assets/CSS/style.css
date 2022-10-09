@@ -1,5 +1,6 @@
 :root {
     --main-color: #1eccd2;
+    --card-bg-color: darkblue;
 }
 
 
@@ -26,6 +27,15 @@ header {
     border-style: solid;
     height: 250px;
 }
+.custom-today h2 {
+    padding-top: 10px;
+    padding-left: 10px;
+    font-weight: bold;
+}
+.custom-today div {
+    font-size: 20px;
+    padding: 20px
+}
 #searchCityBtn {
     background-color: var(--main-color);
     
@@ -44,6 +54,6 @@ main{
     width: 70%;
 }
 .custom-card {
-    background-color: var(--main-color);
+    background-color: var(--card-bg-color);
     color: white;
 }
