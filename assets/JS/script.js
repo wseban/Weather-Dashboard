@@ -231,7 +231,7 @@ function historyBtn(){
     var historyBtn = document.createElement("button");
     cities.appendChild(historyBtn);
     historyBtn.setAttribute("id", "history-Btn")
-    historyBtn.textContent = inputEl.value.trim()
+    historyBtn.textContent = cityName;
     historyArr.push(inputEl.value);
     localStorage.setItem(inputEl.value, JSON.stringify(inputEl.value));
     historyBtn.addEventListener("click", )
