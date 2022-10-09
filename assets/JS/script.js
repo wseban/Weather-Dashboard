@@ -46,10 +46,19 @@ function receiveLatLon(){
             lon = data[0].lon
         })
             }
-
+function getAndRunHistory(){
+    for (var i = 0; i < historyArr.length - 1; i++){
+        if (historyBtn.innerText === historyArr[i]){
+            desiredCity = JSON.parse(localStorage.getItem(historyArr[i]))
+        }
+    }
+    receiveWeatherData();
+}
 //write function fetches correct information
 function receiveWeatherData(){
+    console.log();
     desiredCity = inputEl.value.trim()
+    
     geoCode = "https://api.openweathermap.org/geo/1.0/direct?q=" + desiredCity + "&limit=5&appid=c7da76dff8b1bd8f228c32b1196cf664";
     fetch (geoCode)
         .then(function(response){
@@ -73,32 +82,32 @@ function receiveWeatherData(){
                          console.log(data.city.name)
                          cityName = data.city.name
                          todayIcon = data.list[0].weather[0].icon;
-                         todayIconUrl = "http://openweathermap.org/img/w/" + todayIcon + ".png";
+                         todayIconUrl = "https://openweathermap.org/img/w/" + todayIcon + ".png";
                          todayTemp = data.list[0].main.temp;
                          todayWind = data.list[0].wind.speed;
                          todayHumidity = data.list[0].main.humidity;
                          tomorrowIcon = data.list[7].weather[0].icon;
-                         tomorrowIconUrl = "http://openweathermap.org/img/w/" + tomorrowIcon + ".png";
+                         tomorrowIconUrl = "https://openweathermap.org/img/w/" + tomorrowIcon + ".png";
                          tomorrowTemp = data.list[7].main.temp;
                          tomorrowWind = data.list[7].wind.speed;
                          tomorrowHumidity = data.list[7].main.humidity;
                          dayPlus2Icon = data.list[14].weather[0].icon;
-                         plus2IconUrl = "http://openweathermap.org/img/w/" + dayPlus2Icon + ".png";
+                         plus2IconUrl = "https://openweathermap.org/img/w/" + dayPlus2Icon + ".png";
                          dayPlus2Temp = data.list[14].main.temp;
                          dayPlus2Wind = data.list[14].wind.speed;
                          dayPlus2Humidity = data.list[14].main.humidity;
                          dayPlus3Icon = data.list[23].weather[0].icon;
-                         plus3IconUrl = "http://openweathermap.org/img/w/" + dayPlus3Icon + ".png";
+                         plus3IconUrl = "https://openweathermap.org/img/w/" + dayPlus3Icon + ".png";
                          dayPlus3Temp = data.list[23].main.temp;
                          dayPlus3Wind = data.list[23].wind.speed;
                          dayPlus3Humidity = data.list[23].main.humidity;
                          dayPlus4Icon = data.list[31].weather[0].icon;
-                         plus4IconUrl = "http://openweathermap.org/img/w/" + dayPlus4Icon + ".png";
+                         plus4IconUrl = "https://openweathermap.org/img/w/" + dayPlus4Icon + ".png";
                          dayPlus4Temp = data.list[31].main.temp;
                          dayPlus4Wind = data.list[31].wind.speed;
                          dayPlus4Humidity = data.list[31].main.humidity;
                          dayPlus5Icon = data.list[39].weather[0].icon;
-                         plus5IconUrl = "http://openweathermap.org/img/w/" + dayPlus5Icon + ".png";
+                         plus5IconUrl = "https://openweathermap.org/img/w/" + dayPlus5Icon + ".png";
                          dayPlus5Temp = data.list[39].main.temp;
                          dayPlus5Wind = data.list[39].wind.speed;
                          dayPlus5Humidity = data.list[39].main.humidity;
@@ -211,7 +220,7 @@ function displayWeatherInfo(){
     finalHumidityEl.textContent = "Humidity: " + dayPlus5Humidity + " %";
     
     historyBtn()
-    saveResults()
+    
     /*forecastEl.append(today);
     
 
@@ -232,9 +241,8 @@ function historyBtn(){
     cities.appendChild(historyBtn);
     historyBtn.setAttribute("id", "history-Btn")
     historyBtn.textContent = cityName;
-    historyArr.push(inputEl.value);
-    localStorage.setItem(inputEl.value, JSON.stringify(inputEl.value));
-    historyBtn.addEventListener("click", )
+    historyArr.push(localStorage.setItem(inputEl.value, JSON.stringify(inputEl.value)));
+    historyBtn.addEventListener("click", getAndRunHistory)
 }
 //save info to local storage
 
