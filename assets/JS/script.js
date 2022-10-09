@@ -17,7 +17,7 @@ var twoDaysOut = document.getElementById("twoDaysOut");
 var threeDaysOut = document.getElementById("threeDaysOut");
 var fourDaysOut = document.getElementById("fourDaysOut");
 var fiveDaysOut = document.getElementById("fiveDaysOut");
-var geoCode = "http://api.openweathermap.org/geo/1.0/direct?q=" + inputEl.value.trim() + "&limit=5&appid=c7da76dff8b1bd8f228c32b1196cf664"
+var geoCode = "http://api.openweathermap.org/geo/1.0/direct?q=" + inputEl.value.trim() + "&limit=5&appid=c7da76dff8b1bd8f228c32b1196cf664";
 var weatherUrl = "http://api.openweathermap.org/data/2.5/forecast?lat=32.715736&lon=-117.161087&limit=5&appid=c7da76dff8b1bd8f228c32b1196cf664";
 
 //client types in city as input
@@ -29,7 +29,7 @@ function test(){
 
 // write function transfering city into lon lat coordinates
 function receiveLatLon(){
-    fetch (geoCode)
+    fetch (eval(geoCode))
         .then(function(response){
             return response.json()
         })
