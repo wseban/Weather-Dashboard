@@ -50,7 +50,7 @@ function receiveLatLon(){
 //write function fetches correct information
 function receiveWeatherData(){
     desiredCity = inputEl.value.trim()
-    geoCode = "http://api.openweathermap.org/geo/1.0/direct?q=" + desiredCity + "&limit=5&appid=c7da76dff8b1bd8f228c32b1196cf664";
+    geoCode = "https://api.openweathermap.org/geo/1.0/direct?q=" + desiredCity + "&limit=5&appid=c7da76dff8b1bd8f228c32b1196cf664";
     fetch (geoCode)
         .then(function(response){
             return response.json()
@@ -62,7 +62,7 @@ function receiveWeatherData(){
             lon = data[0].lon
         })
             .then(function(){
-                weatherUrl = "http://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&units=imperial&limit=5&appid=c7da76dff8b1bd8f228c32b1196cf664";
+                weatherUrl = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&units=imperial&limit=5&appid=c7da76dff8b1bd8f228c32b1196cf664";
                 fetch(weatherUrl)
                     .then(function(response){
                         //console.log(response)
