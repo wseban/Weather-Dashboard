@@ -32,6 +32,9 @@ header {
     padding-left: 10px;
     font-weight: bold;
 }
+.custom-today img {
+    height: 100px;
+}
 .custom-today div {
     font-size: 20px;
     padding: 20px
@@ -56,4 +59,12 @@ main{
 .custom-card {
     background-color: var(--card-bg-color);
     color: white;
+}
+.custom-card img {
+    height: 50px;
+    width: 60px;
+}
+#history-Btn {
+    width: 240px;
+    margin: 10px;
 }

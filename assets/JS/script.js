@@ -10,6 +10,8 @@ THEN I am again presented with current and future conditions for that city*/
 var cities = document.getElementById("city-search");
 var forecastEl = document.getElementById("forecast");
 var searchBtn = document.getElementById("searchCityBtn");
+var historyClickers = document.getElementById("history");
+var historyArr = [];
 var inputEl = document.querySelector(".custom-input");
 var today = document.querySelector(".custom-today");
 var tomorrow = document.getElementById("tomorrow");
@@ -47,7 +49,8 @@ function receiveLatLon(){
 
 //write function fetches correct information
 function receiveWeatherData(){
-    geoCode = "http://api.openweathermap.org/geo/1.0/direct?q=" + inputEl.value.trim() + "&limit=5&appid=c7da76dff8b1bd8f228c32b1196cf664";
+    desiredCity = inputEl.value.trim()
+    geoCode = "http://api.openweathermap.org/geo/1.0/direct?q=" + desiredCity + "&limit=5&appid=c7da76dff8b1bd8f228c32b1196cf664";
     fetch (geoCode)
         .then(function(response){
             return response.json()
@@ -69,36 +72,54 @@ function receiveWeatherData(){
                          console.log(data)
                          console.log(data.city.name)
                          cityName = data.city.name
-                         todayIcon = "http://openweathermap.org/img/w/" + data.list[0].weather[0].icon + ".png";
+                         todayIcon = data.list[0].weather[0].icon;
+                         todayIconUrl = "http://openweathermap.org/img/w/" + todayIcon + ".png";
                          todayTemp = data.list[0].main.temp;
                          todayWind = data.list[0].wind.speed;
                          todayHumidity = data.list[0].main.humidity;
-                         tomorrowTemp = data.list[5].main.temp;
-                         tomorrowWind = data.list[5].wind.speed;
-                         tomorrowHumidity = data.list[5].main.humidity;
-                         dayPlus2Temp = data.list[13].main.temp;
-                         dayPlus2Wind = data.list[13].wind.speed;
-                         dayPlus2Humidity = data.list[13].main.humidity;
-                         dayPlus3Temp = data.list[21].main.temp;
-                         dayPlus3Wind = data.list[21].wind.speed;
-                         dayPlus3Humidity = data.list[21].main.humidity;
-                         dayPlus4Temp = data.list[29].main.temp;
-                         dayPlus4Wind = data.list[29].wind.speed;
-                         dayPlus4Humidity = data.list[29].main.humidity;
-                         dayPlus5Temp = data.list[37].main.temp;
-                         dayPlus5Wind = data.list[37].wind.speed;
-                         dayPlus5Humidity = data.list[37].main.humidity;
+                         tomorrowIcon = data.list[7].weather[0].icon;
+                         tomorrowIconUrl = "http://openweathermap.org/img/w/" + tomorrowIcon + ".png";
+                         tomorrowTemp = data.list[7].main.temp;
+                         tomorrowWind = data.list[7].wind.speed;
+                         tomorrowHumidity = data.list[7].main.humidity;
+                         dayPlus2Icon = data.list[14].weather[0].icon;
+                         plus2IconUrl = "http://openweathermap.org/img/w/" + dayPlus2Icon + ".png";
+                         dayPlus2Temp = data.list[14].main.temp;
+                         dayPlus2Wind = data.list[14].wind.speed;
+                         dayPlus2Humidity = data.list[14].main.humidity;
+                         dayPlus3Icon = data.list[23].weather[0].icon;
+                         plus3IconUrl = "http://openweathermap.org/img/w/" + dayPlus3Icon + ".png";
+                         dayPlus3Temp = data.list[23].main.temp;
+                         dayPlus3Wind = data.list[23].wind.speed;
+                         dayPlus3Humidity = data.list[23].main.humidity;
+                         dayPlus4Icon = data.list[31].weather[0].icon;
+                         plus4IconUrl = "http://openweathermap.org/img/w/" + dayPlus4Icon + ".png";
+                         dayPlus4Temp = data.list[31].main.temp;
+                         dayPlus4Wind = data.list[31].wind.speed;
+                         dayPlus4Humidity = data.list[31].main.humidity;
+                         dayPlus5Icon = data.list[39].weather[0].icon;
+                         plus5IconUrl = "http://openweathermap.org/img/w/" + dayPlus5Icon + ".png";
+                         dayPlus5Temp = data.list[39].main.temp;
+                         dayPlus5Wind = data.list[39].wind.speed;
+                         dayPlus5Humidity = data.list[39].main.humidity;
+                         
+                         
                          displayWeatherInfo();
-                                })
+
+
+                         })
                                     })
                                 }
 //write function that creates tags, texts content onto tags and appends onto parent
 //function 
-function displayWeatherInfo(data){
+function displayWeatherInfo(){
     //today.textContent = inputEl.value //<---information for today goes here
     var todayTitle = document.createElement("h2");
     today.append(todayTitle);
     todayTitle.textContent = cityName + " " + "(" + currentDate + ")";
+    var dailyIcon1 = document.createElement("img");
+    today.append(dailyIcon1);
+    dailyIcon1.setAttribute("src", todayIconUrl);
     var todayTempEl = document.createElement("div");
     todayTitle.append(todayTempEl);
     todayTempEl.textContent = "Temp: " + todayTemp + " °F";
@@ -108,22 +129,29 @@ function displayWeatherInfo(data){
     var todayHumidityEl = document.createElement("div");
     todayTitle.append(todayHumidityEl);
     todayHumidityEl.textContent = "Humidity: " + todayHumidity + " %";
+    
     var tomDate = document.createElement("h5");
     tomorrow.append(tomDate);
     tomDate.textContent = datePlusOne;
+    var dailyIcon2 = document.createElement("img");
+    tomorrow.append(dailyIcon2);
+    dailyIcon2.setAttribute("src", tomorrowIconUrl);
     var tomTempEl = document.createElement("p");
-    tomDate.append(tomTempEl);
+    tomorrow.append(tomTempEl);
     tomTempEl.textContent = "Temp: " + tomorrowTemp + " °F";
     var tomWindEl = document.createElement("p");
-    tomDate.append(tomWindEl);
+    tomorrow.append(tomWindEl);
     tomWindEl.textContent = "Wind: " + tomorrowWind + " MPH";
     var tomHumidityEl = document.createElement("p");
-    tomDate.append(tomHumidityEl);
+    tomorrow.append(tomHumidityEl);
     tomHumidityEl.textContent = "Humidity: " + tomorrowHumidity + " %";
 
     var thirdDayEl = document.createElement("h5");
     twoDaysOut.append(thirdDayEl);
     thirdDayEl.textContent = datePlusTwo;
+    var dailyIcon3 = document.createElement("img");
+    twoDaysOut.append(dailyIcon3);
+    dailyIcon3.setAttribute("src", plus2IconUrl);
     var thirdTempEl = document.createElement("p");
     twoDaysOut.append(thirdTempEl);
     thirdTempEl.textContent = "Temp: " + dayPlus2Temp + " °F";
@@ -137,9 +165,12 @@ function displayWeatherInfo(data){
     var fourthDayEl = document.createElement("h5");
     threeDaysOut.append(fourthDayEl);
     fourthDayEl.textContent = datePlusThree;
+    var dailyIcon4 = document.createElement("img");
+    threeDaysOut.append(dailyIcon4);
+    dailyIcon4.setAttribute("src", plus3IconUrl);
     var fourthTempEl = document.createElement("p");
     threeDaysOut.append(fourthTempEl);
-    thirdTempEl.textContent = "Temp: " + dayPlus3Temp + " °F";
+    fourthTempEl.textContent = "Temp: " + dayPlus3Temp + " °F";
     var fourthWindEl = document.createElement("p");
     threeDaysOut.append(fourthWindEl);
     fourthWindEl.textContent = "Wind: " + dayPlus3Wind + " MPH";
@@ -150,12 +181,15 @@ function displayWeatherInfo(data){
     var fifthDayEl = document.createElement("h5");
     fourDaysOut.append(fifthDayEl);
     fifthDayEl.textContent = datePlusFour;
+    var dailyIcon5 = document.createElement("img");
+    fourDaysOut.append(dailyIcon5);
+    dailyIcon5.setAttribute("src", plus4IconUrl);
     var fifthTempEl = document.createElement("p");
     fourDaysOut.append(fifthTempEl);
     fifthTempEl.textContent = "Temp: " + dayPlus4Temp + " °F";
     var fifthWindEl = document.createElement("p");
     fourDaysOut.append(fifthWindEl);
-    tomWindEl.textContent = "Wind: " + dayPlus4Wind + " MPH";
+    fifthWindEl.textContent = "Wind: " + dayPlus4Wind + " MPH";
     var fifthHumidityEl = document.createElement("p");
     fourDaysOut.append(fifthHumidityEl);
     fifthHumidityEl.textContent = "Humidity: " + dayPlus4Humidity + " %";
@@ -163,6 +197,9 @@ function displayWeatherInfo(data){
     var finalDayEl = document.createElement("h5");
     fiveDaysOut.append(finalDayEl);
     finalDayEl.textContent = datePlusFive;
+    var dailyIcon5 = document.createElement("img");
+    fiveDaysOut.append(dailyIcon5);
+    dailyIcon5.setAttribute("src", plus5IconUrl);
     var finalTempEl = document.createElement("p");
     fiveDaysOut.append(finalTempEl);
     finalTempEl.textContent = "Temp: " + dayPlus5Temp + " °F";
@@ -172,7 +209,11 @@ function displayWeatherInfo(data){
     var finalHumidityEl = document.createElement("p");
     fiveDaysOut.append(finalHumidityEl);
     finalHumidityEl.textContent = "Humidity: " + dayPlus5Humidity + " %";
+    
+    historyBtn()
+    saveResults()
     /*forecastEl.append(today);
+    
 
     var fiveDayTitle = document.createElement("h3");
     forecastEl.append(fiveDayTitle);
@@ -183,9 +224,18 @@ function displayWeatherInfo(data){
     fiveDayRow.classList = "row row-cols-1 custom-nextFiveRow";
     forecastEl.append(fiveDayRow);
     console.log(data)*/
-   
+   console.log(inputEl.value)
 }
 
+function historyBtn(){
+    var historyBtn = document.createElement("button");
+    cities.appendChild(historyBtn);
+    historyBtn.setAttribute("id", "history-Btn")
+    historyBtn.textContent = inputEl.value.trim()
+    historyArr.push(inputEl.value);
+    localStorage.setItem(inputEl.value, JSON.stringify(inputEl.value));
+    historyBtn.addEventListener("click", )
+}
 //save info to local storage
 
 
@@ -195,7 +245,9 @@ function displayWeatherInfo(data){
 
 
 //attach listener to button to call back local storage items
-searchBtn.addEventListener("click", receiveWeatherData);
+searchBtn.addEventListener("click", receiveWeatherData)
+       
+        
 
 
 //function test(){
