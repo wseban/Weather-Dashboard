@@ -1,0 +1,49 @@
+:root {
+    --main-color: #1eccd2;
+}
+
+
+
+header {
+    display: flex;
+    justify-content: center;
+    background-color: var(--main-color);
+    padding: 15px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: white;
+}
+.content {
+    display: flex;
+}
+#forecast {
+    padding: 20px;
+    /*visibility: hidden;*/
+}
+.custom-input {
+    border-width: 5px;
+}
+.custom-today {
+    border-style: solid;
+    height: 250px;
+}
+#searchCityBtn {
+    background-color: var(--main-color);
+    
+}
+.custom-sixing {
+    height: 250px;
+}
+aside {
+    width: 30%;
+    padding: 20px;
+}
+aside p {
+    font-size: 30px;
+}
+main{
+    width: 70%;
+}
+.custom-card {
+    background-color: var(--main-color);
+    color: white;
+}
