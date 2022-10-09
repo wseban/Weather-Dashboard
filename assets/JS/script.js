@@ -10,30 +10,47 @@ THEN I am again presented with current and future conditions for that city*/
 var cities = document.getElementById("city-search");
 var forecastEl = document.getElementById("forecast");
 var searchBtn = document.getElementById("searchCityBtn");
-var inputEl = document.querySelector(".custom-input").value.trim();
+var inputEl = document.querySelector(".custom-input");
 var today = document.querySelector(".custom-today");
 var tomorrow = document.getElementById("tomorrow");
 var twoDaysOut = document.getElementById("twoDaysOut");
 var threeDaysOut = document.getElementById("threeDaysOut");
 var fourDaysOut = document.getElementById("fourDaysOut");
 var fiveDaysOut = document.getElementById("fiveDaysOut");
-var weatherUrl = "https://api.openweathermap.org/geo/2.5/forecast?lat=32.715736&lon=-117.161087&limit=5&appid=c7da76dff8b1bd8f228c32b1196cf664";
+var geoCode = "http://api.openweathermap.org/geo/1.0/direct?q=" + inputEl.value.trim() + "&limit=5&appid=c7da76dff8b1bd8f228c32b1196cf664"
+var weatherUrl = "http://api.openweathermap.org/data/2.5/forecast?lat=32.715736&lon=-117.161087&limit=5&appid=c7da76dff8b1bd8f228c32b1196cf664";
 
 //client types in city as input
 
 //write listen to SearchCityBtn
-
+function test(){
+    console.log(geoCode)
+}
 
 // write function transfering city into lon lat coordinates
-
+function receiveLatLon(){
+    fetch (geoCode)
+        .then(function(response){
+            return response.json()
+        })
+        .then(function(data){
+            console.log(data)
+        })
+            }
 
 //write function fetches correct information
-function receiveWeatherData(weatherUrl){
-
+function receiveWeatherData(){
+    
 fetch(weatherUrl)
       .then(function(response){
           console.log(response)
-        })}
+          return response.json()
+        })
+        .then(function(data){
+            console.log(data)
+            
+        })
+            }
 //write function that creates tags, texts content onto tags and appends onto parent
 //function 
 function displayWeatherInfo(data){
@@ -61,7 +78,7 @@ function displayWeatherInfo(data){
 
 
 //attach listener to button to call back local storage items
-searchBtn.addEventListener("click", receiveWeatherData);
+searchBtn.addEventListener("click", receiveLatLon);
 
 
 //function test(){
