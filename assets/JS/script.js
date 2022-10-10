@@ -57,14 +57,14 @@ function searchHistoryList(){
 
 //write function fetches correct information
 function receiveWeatherData(event){
-    console.log(event);
+    //console.log(event);
     if (event.target.id === "searchCityBtn"){
         desiredCity = inputEl.value.trim()
     }
     if (event.target.id === "history-Btn"){
         desiredCity = event.target.innerHTML
     }
-    console.log(event.target.innerHTML)
+    //console.log(event.target.innerHTML)
     
     geoCode = "https://api.openweathermap.org/geo/1.0/direct?q=" + desiredCity + "&limit=5&appid=c7da76dff8b1bd8f228c32b1196cf664";
     fetch (geoCode)
@@ -85,8 +85,8 @@ function receiveWeatherData(event){
                             return response.json()
                              })
                             .then(function(data){
-                         console.log(data)
-                         console.log(data.city.name)
+                         //console.log(data)
+                         //console.log(data.city.name)
                          cityName = data.city.name
                          todayIcon = data.list[0].weather[0].icon;
                          todayIconUrl = "https://openweathermap.org/img/w/" + todayIcon + ".png";
@@ -248,7 +248,7 @@ function displayWeatherInfo(){
     fiveDayRow.classList = "row row-cols-1 custom-nextFiveRow";
     forecastEl.append(fiveDayRow);
     console.log(data)*/
-   console.log(inputEl.value)
+   //console.log(inputEl.value)
 }
 
 
