@@ -26,7 +26,7 @@ var datePlusThree = moment().add(3,'day').format("MM/DD/YYYY");
 var datePlusFour = moment().add(4,'day').format("MM/DD/YYYY");
 var datePlusFive = moment().add(5,'day').format("MM/DD/YYYY");
 var geoCode;
-
+var historyBtn;
 
 //client types in city as input
 //write listen to SearchCityBtn
@@ -46,8 +46,8 @@ var geoCode;
         })
             }*/
 
-function historyBtn(){
-    var historyBtn = document.createElement("button");
+function searchHistoryList(){
+    historyBtn = document.createElement("button");
     cities.appendChild(historyBtn);
     historyBtn.setAttribute("id", "history-Btn")
     historyBtn.textContent = cityName;
@@ -232,8 +232,9 @@ function displayWeatherInfo(){
     fiveDaysOut.append(finalHumidityEl);
     finalHumidityEl.textContent = "Humidity: " + dayPlus5Humidity + " %";
     
+            searchHistoryList();
+       
     
-    historyBtn()
     
     /*forecastEl.append(today);
     
