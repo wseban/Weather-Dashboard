@@ -122,6 +122,12 @@ function receiveWeatherData(){
 //write function that creates tags, texts content onto tags and appends onto parent
 //function 
 function displayWeatherInfo(){
+    today.textContent = "";
+    tomorrow.textContent = "";
+    twoDaysOut.textContent = "";
+    threeDaysOut.textContent = "";
+    fourDaysOut.textContent = "";
+    fiveDaysOut.textContent = "";
     //today.textContent = inputEl.value //<---information for today goes here
     var todayTitle = document.createElement("h2");
     today.append(todayTitle);
