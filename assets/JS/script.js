@@ -28,12 +28,11 @@ var datePlusFive = moment().add(5,'day').format("MM/DD/YYYY");
 var geoCode;
 
 
-
 //client types in city as input
 //write listen to SearchCityBtn
 
 // write function transfering city into lon lat coordinates
-function receiveLatLon(){
+/*function receiveLatLon(){
     geoCode = "http://api.openweathermap.org/geo/1.0/direct?q=" + inputEl.value.trim() + "&limit=5&appid=c7da76dff8b1bd8f228c32b1196cf664";
     fetch (geoCode)
         .then(function(response){
@@ -45,19 +44,27 @@ function receiveLatLon(){
             console.log(lat);
             lon = data[0].lon
         })
+            }*/
+
+function historyBtn(){
+    var historyBtn = document.createElement("button");
+    cities.appendChild(historyBtn);
+    historyBtn.setAttribute("id", "history-Btn")
+    historyBtn.textContent = cityName;
+    historyArr.push(localStorage.setItem(inputEl.value, JSON.stringify(inputEl.value)));
+    historyBtn.addEventListener("click", receiveWeatherData)
             }
-function getAndRunHistory(){
-    for (var i = 0; i < historyArr.length - 1; i++){
-        if (historyBtn.innerText === historyArr[i]){
-            desiredCity = JSON.parse(localStorage.getItem(historyArr[i]))
-        }
-    }
-    receiveWeatherData();
-}
+
 //write function fetches correct information
-function receiveWeatherData(){
-    console.log();
-    desiredCity = inputEl.value.trim()
+function receiveWeatherData(event){
+    console.log(event);
+    if (event.target.id === "searchCityBtn"){
+        desiredCity = inputEl.value.trim()
+    }
+    if (event.target.id === "history-Btn"){
+        desiredCity = event.target.innerHTML
+    }
+    console.log(event.target.innerHTML)
     
     geoCode = "https://api.openweathermap.org/geo/1.0/direct?q=" + desiredCity + "&limit=5&appid=c7da76dff8b1bd8f228c32b1196cf664";
     fetch (geoCode)
@@ -225,6 +232,7 @@ function displayWeatherInfo(){
     fiveDaysOut.append(finalHumidityEl);
     finalHumidityEl.textContent = "Humidity: " + dayPlus5Humidity + " %";
     
+    
     historyBtn()
     
     /*forecastEl.append(today);
@@ -242,14 +250,7 @@ function displayWeatherInfo(){
    console.log(inputEl.value)
 }
 
-function historyBtn(){
-    var historyBtn = document.createElement("button");
-    cities.appendChild(historyBtn);
-    historyBtn.setAttribute("id", "history-Btn")
-    historyBtn.textContent = cityName;
-    historyArr.push(localStorage.setItem(inputEl.value, JSON.stringify(inputEl.value)));
-    historyBtn.addEventListener("click", getAndRunHistory)
-}
+
 //save info to local storage
 
 
