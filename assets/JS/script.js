@@ -31,21 +31,6 @@ var historyBtn;
 //client types in city as input
 //write listen to SearchCityBtn
 
-// write function transfering city into lon lat coordinates
-/*function receiveLatLon(){
-    geoCode = "http://api.openweathermap.org/geo/1.0/direct?q=" + inputEl.value.trim() + "&limit=5&appid=c7da76dff8b1bd8f228c32b1196cf664";
-    fetch (geoCode)
-        .then(function(response){
-            return response.json()
-        })
-        .then(function(data){
-            console.log(data)
-            lat = data[0].lat
-            console.log(lat);
-            lon = data[0].lon
-        })
-            }*/
-
 function searchHistoryList(){
     historyBtn = document.createElement("button");
     cities.appendChild(historyBtn);
@@ -234,21 +219,6 @@ function displayWeatherInfo(){
     
             searchHistoryList();
        
-    
-    
-    /*forecastEl.append(today);
-    
-
-    var fiveDayTitle = document.createElement("h3");
-    forecastEl.append(fiveDayTitle);
-    fiveDayTitle.classList = "custom-five";
-    fiveDayTitle.textContent = "5 Day Forecast:";
-
-    var fiveDayRow = document.createElement("div");
-    fiveDayRow.classList = "row row-cols-1 custom-nextFiveRow";
-    forecastEl.append(fiveDayRow);
-    console.log(data)*/
-   //console.log(inputEl.value)
 }
 
 
